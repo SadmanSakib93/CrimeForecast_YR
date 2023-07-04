@@ -6,6 +6,7 @@ WITH distinct_crimes AS (
 )
 
 SELECT DATE(date) AS date, 
+	SUM(num_of_crimes) OVER (ORDER BY date ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) as previous_day_crimes,
     SUM(num_of_crimes) OVER (ORDER BY date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) as last_7_days_crimes,
     SUM(num_of_crimes) OVER (ORDER BY date ROWS BETWEEN 30 PRECEDING AND CURRENT ROW) as last_30_days_crimes,
     num_of_crimes 
